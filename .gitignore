@@ -18,3 +18,16 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+###> Phpstorm / Intelijj ###
+.idea/
+.vscode/
+###< Phpstorm / Intelijj ###
+
+###> Other ###
+/docs/
+####< Other ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
