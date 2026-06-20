@@ -64,7 +64,7 @@ Administrators can:
 ### Quality
 
 * PHPStan
-* PHP CS Fixer / Pint
+* Laravel Pint
 * PHPUnit
 
 ---
