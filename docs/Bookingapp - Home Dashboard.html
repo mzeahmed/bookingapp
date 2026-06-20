@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Bookingapp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563EB',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        appbg: '#F8FAFC',
+                        card: '#FFFFFF',
+                        text: '#0F172A',
+                        muted: '#64748B',
+                        border: '#E2E8F0'
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(15, 23, 42, 0.05)',
+                        'float': '0 10px 40px -10px rgba(15, 23, 42, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { margin: 0; padding: 0; background-color: #F8FAFC; }
+        /* Custom Scrollbar for a cleaner SaaS look */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+    </style>
+</head>
+<body class="text-text font-sans antialiased bg-appbg flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header id="header" class="fixed top-0 w-full bg-card/95 backdrop-blur-sm border-b border-border z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-3">
+                        <i class="fa-solid fa-layer-group text-white text-sm"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-text">Bookingapp</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-text font-medium hover:text-primary transition-colors">Find a Space</a>
+                    <a href="#" class="text-muted hover:text-text transition-colors">How it works</a>
+                    <a href="#" class="text-muted hover:text-text transition-colors">For Teams</a>
+                    <a href="#" class="text-muted hover:text-text transition-colors">Pricing</a>
+                </nav>
+
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="text-text font-medium hover:text-primary transition-colors px-3 py-2">Log in</a>
+                    <a href="#" class="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-medium transition-colors shadow-sm">Sign up</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-text hover:text-primary focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20">
+        
+        <!-- Hero Section (Inspired by Fresha/OpenTable Search prominence) -->
+        <section id="hero" class="relative pt-24 pb-32 overflow-hidden bg-white border-b border-border">
+            <!-- Decorative background elements -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-50 via-white to-white opacity-70"></div>
+            
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text mb-6">
+                    Book local meeting rooms <br class="hidden md:block" />and collaborative workspaces.
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10">
+                    Discover, book, and manage premium spaces for your team in seconds. No commitments, just great places to work.
+                </p>
+
+                <!-- Complex Search Bar Component -->
+                <div class="bg-card rounded-[16px] shadow-float border border-border p-2 mx-auto max-w-4xl flex flex-col md:flex-row items-center space-y-2 md:space-y-0 relative z-20">
+                    
+                    <!-- Location Input -->
+                    <div class="flex-1 w-full md:w-auto flex items-center px-4 py-2 border-b md:border-b-0 md:border-r border-border hover:bg-gray-50 rounded-t-[14px] md:rounded-l-[14px] md:rounded-tr-none transition-colors cursor-text">
+                        <i class="fa-solid fa-location-dot text-muted mr-3"></i>
+                        <div class="flex flex-col text-left w-full">
+                            <label class="text-[11px] font-semibold uppercase text-muted tracking-wider">Location</label>
+                            <input type="text" placeholder="City, neighborhood, or building" class="bg-transparent border-none focus:ring-0 p-0 text-text text-sm font-medium placeholder-gray-400 w-full outline-none" value="San Francisco, CA">
+                        </div>
+                    </div>
+
+                    <!-- Date Input -->
+                    <div class="flex-1 w-full md:w-auto flex items-center px-4 py-2 border-b md:border-b-0 md:border-r border-border hover:bg-gray-50 transition-colors cursor-pointer">
+                        <i class="fa-regular fa-calendar text-muted mr-3"></i>
+                        <div class="flex flex-col text-left w-full">
+                            <label class="text-[11px] font-semibold uppercase text-muted tracking-wider">Date</label>
+                            <span class="text-text text-sm font-medium">Oct 24, 2023</span>
+                        </div>
+                    </div>
+
+                    <!-- Time & Duration Input -->
+                    <div class="flex-1 w-full md:w-auto flex items-center px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer md:border-r border-border">
+                        <i class="fa-regular fa-clock text-muted mr-3"></i>
+                        <div class="flex flex-col text-left w-full">
+                            <label class="text-[11px] font-semibold uppercase text-muted tracking-wider">Time</label>
+                            <span class="text-text text-sm font-medium">09:00 AM - 2 hrs</span>
+                        </div>
+                    </div>
+
+                    <!-- Guests Input -->
+                    <div class="flex-1 w-full md:w-auto flex items-center px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer">
+                        <i class="fa-solid fa-user-group text-muted mr-3"></i>
+                        <div class="flex flex-col text-left w-full">
+                            <label class="text-[11px] font-semibold uppercase text-muted tracking-wider">Capacity</label>
+                            <span class="text-text text-sm font-medium">Up to 8 people</span>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="w-full md:w-auto pl-2 pr-1 py-1">
+                        <button class="w-full md:w-auto bg-text hover:bg-black text-white px-8 py-3.5 rounded-[12px] font-medium transition-colors flex items-center justify-center h-full shadow-sm">
+                            <span>Search</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex items-center justify-center gap-4 text-sm text-muted">
+                    <span class="flex items-center"><i class="fa-solid fa-check-circle text-success mr-1.5"></i> Instant booking</span>
+                    <span class="flex items-center"><i class="fa-solid fa-check-circle text-success mr-1.5"></i> Verified spaces</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-appbg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-text">Everything you need to work effectively</h2>
+                    <p class="mt-4 text-muted text-lg">Designed for modern teams who value flexibility and premium environments.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Feature 1 -->
+                    <div class="bg-card p-8 rounded-[16px] border border-border shadow-sm">
+                        <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-text mb-3">Easy booking</h3>
+                        <p class="text-muted leading-relaxed">Find and reserve a space in less than 60 seconds. Our intuitive interface makes scheduling a breeze for you and your team.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-card p-8 rounded-[16px] border border-border shadow-sm">
+                        <div class="w-12 h-12 bg-green-50 text-success rounded-xl flex items-center justify-center text-xl mb-6">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-text mb-3">Real-time availability</h3>
+                        <p class="text-muted leading-relaxed">Say goodbye to double bookings. Our calendar syncs instantly, showing you exactly what spaces are open right now.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-card p-8 rounded-[16px] border border-border shadow-sm">
+                        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-text mb-3">Secure reservations</h3>
+                        <p class="text-muted leading-relaxed">Enterprise-grade security for your payments and data. Manage access control directly through our unified dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Rooms Section -->
+        <section id="popular-rooms" class="py-20 bg-white border-t border-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold text-text">Popular spaces in San Francisco</h2>
+                        <p class="mt-2 text-muted">Highly rated meeting rooms and private offices available today.</p>
+                    </div>
+                    <a href="#" class="hidden sm:flex items-center text-primary font-medium hover:text-blue-700 transition-colors">
+                        View all <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-card rounded-[16px] border border-border shadow-sm overflow-hidden group hover:shadow-soft transition-all duration-300 flex flex-col h-full cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <div class="h-full w-full bg-gray-200">
+                                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_94e366db06_18eb67896de2eba2.png" alt="modern bright corporate meeting room with large glass windows and wooden table" />
+                            </div>
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs font-semibold text-text flex items-center shadow-sm">
+                                <i class="fa-solid fa-star text-warning mr-1 text-[10px]"></i> 4.9 (128)
+                            </div>
+                            <div class="absolute top-3 right-3 bg-success/10 text-success text-xs font-semibold px-2.5 py-1 rounded-md border border-success/20 backdrop-blur-sm">
+                                Available now
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="text-xs font-medium text-muted uppercase tracking-wider mb-1">Financial District</div>
+                            <h3 class="font-semibold text-lg text-text mb-2 line-clamp-1">Boardroom Alpha</h3>
+                            
+                            <div class="flex items-center gap-4 text-sm text-muted mb-4 mt-auto pt-2">
+                                <span class="flex items-center" title="Capacity"><i class="fa-solid fa-user-group mr-1.5 w-4 text-center"></i> 12</span>
+                                <span class="flex items-center" title="Equipment"><i class="fa-solid fa-tv mr-1.5 w-4 text-center"></i> Screen</span>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-border flex justify-between items-center mt-auto">
+                                <div>
+                                    <span class="font-bold text-lg text-text">$45</span>
+                                    <span class="text-sm text-muted">/hr</span>
+                                </div>
+                                <button class="text-primary bg-blue-50 hover:bg-primary hover:text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">Book</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-card rounded-[16px] border border-border shadow-sm overflow-hidden group hover:shadow-soft transition-all duration-300 flex flex-col h-full cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <div class="h-full w-full bg-gray-200">
+                                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_7747ab4caa_2d084ba9936cb701.png" alt="cozy creative workspace with plants and colorful furniture" />
+                            </div>
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs font-semibold text-text flex items-center shadow-sm">
+                                <i class="fa-solid fa-star text-warning mr-1 text-[10px]"></i> 4.8 (84)
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="text-xs font-medium text-muted uppercase tracking-wider mb-1">SoMa</div>
+                            <h3 class="font-semibold text-lg text-text mb-2 line-clamp-1">Creative Studio Hub</h3>
+                            
+                            <div class="flex items-center gap-4 text-sm text-muted mb-4 mt-auto pt-2">
+                                <span class="flex items-center"><i class="fa-solid fa-user-group mr-1.5 w-4 text-center"></i> 6</span>
+                                <span class="flex items-center"><i class="fa-solid fa-mug-hot mr-1.5 w-4 text-center"></i> Coffee</span>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-border flex justify-between items-center mt-auto">
+                                <div>
+                                    <span class="font-bold text-lg text-text">$30</span>
+                                    <span class="text-sm text-muted">/hr</span>
+                                </div>
+                                <button class="text-primary bg-blue-50 hover:bg-primary hover:text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">Book</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-card rounded-[16px] border border-border shadow-sm overflow-hidden group hover:shadow-soft transition-all duration-300 flex flex-col h-full cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <div class="h-full w-full bg-gray-200">
+                                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_2e06e95900_3a246ce11c91d2b7.png" alt="minimalist private glass office pod in a large open space" />
+                            </div>
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs font-semibold text-text flex items-center shadow-sm">
+                                <i class="fa-solid fa-star text-warning mr-1 text-[10px]"></i> 5.0 (42)
+                            </div>
+                             <div class="absolute top-3 right-3 bg-success/10 text-success text-xs font-semibold px-2.5 py-1 rounded-md border border-success/20 backdrop-blur-sm">
+                                Available now
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="text-xs font-medium text-muted uppercase tracking-wider mb-1">Mission District</div>
+                            <h3 class="font-semibold text-lg text-text mb-2 line-clamp-1">Focus Pod 02</h3>
+                            
+                            <div class="flex items-center gap-4 text-sm text-muted mb-4 mt-auto pt-2">
+                                <span class="flex items-center"><i class="fa-solid fa-user-group mr-1.5 w-4 text-center"></i> 2</span>
+                                <span class="flex items-center"><i class="fa-solid fa-wifi mr-1.5 w-4 text-center"></i> Fast Wi-Fi</span>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-border flex justify-between items-center mt-auto">
+                                <div>
+                                    <span class="font-bold text-lg text-text">$15</span>
+                                    <span class="text-sm text-muted">/hr</span>
+                                </div>
+                                <button class="text-primary bg-blue-50 hover:bg-primary hover:text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">Book</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-card rounded-[16px] border border-border shadow-sm overflow-hidden group hover:shadow-soft transition-all duration-300 flex flex-col h-full cursor-pointer">
+                        <div class="h-48 overflow-hidden relative">
+                            <div class="h-full w-full bg-gray-200">
+                                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_308f55bfb1_62531061c747d2ce.png" alt="large modern event space with theater seating and a stage" />
+                            </div>
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs font-semibold text-text flex items-center shadow-sm">
+                                <i class="fa-solid fa-star text-warning mr-1 text-[10px]"></i> 4.7 (215)
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="text-xs font-medium text-muted uppercase tracking-wider mb-1">Downtown</div>
+                            <h3 class="font-semibold text-lg text-text mb-2 line-clamp-1">The Grand Assembly</h3>
+                            
+                            <div class="flex items-center gap-4 text-sm text-muted mb-4 mt-auto pt-2">
+                                <span class="flex items-center"><i class="fa-solid fa-user-group mr-1.5 w-4 text-center"></i> 50+</span>
+                                <span class="flex items-center"><i class="fa-solid fa-microphone mr-1.5 w-4 text-center"></i> A/V Setup</span>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-border flex justify-between items-center mt-auto">
+                                <div>
+                                    <span class="font-bold text-lg text-text">$150</span>
+                                    <span class="text-sm text-muted">/hr</span>
+                                </div>
+                                <button class="text-primary bg-blue-50 hover:bg-primary hover:text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">Book</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="mt-8 text-center sm:hidden">
+                    <button class="w-full bg-white border border-border text-text font-medium px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors">View all spaces</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-border pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-layer-group text-white text-sm"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-text">Bookingapp</span>
+                    </div>
+                    <p class="text-muted text-sm max-w-xs mb-6">The modern platform to discover, book, and manage flexible workspaces globally.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-muted hover:text-text transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-muted hover:text-text transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-muted hover:text-text transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-text mb-4">Product</h4>
+                    <ul class="space-y-3 text-sm text-muted">
+                        <li><a href="#" class="hover:text-primary transition-colors">Find a Workspace</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">For Enterprise</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Changelog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-text mb-4">Company</h4>
+                    <ul class="space-y-3 text-sm text-muted">
+                        <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-text mb-4">Legal</h4>
+                    <ul class="space-y-3 text-sm text-muted">
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted">
+                <p>&copy; 2023 Bookingapp Inc. All rights reserved.</p>
+                <div class="flex items-center space-x-2 mt-4 md:mt-0">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>English (US)</span>
+                    <span class="mx-2">•</span>
+                    <span>USD ($)</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

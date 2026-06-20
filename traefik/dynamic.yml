@@ -1,0 +1,30 @@
+http:
+    routers:
+        bookingapp:
+            rule: Host(`bookingapp.local`)
+            entryPoints:
+                - web
+                - websecure
+            service: bookingapp
+            tls: {}
+        mailpit:
+            rule: Host(`mail.bookingapp.local`)
+            entryPoints:
+                - web
+                - websecure
+            service: mailpit
+            tls: {}
+    services:
+        bookingapp:
+            loadBalancer:
+                servers:
+                    - url: http://nginx:80
+        mailpit:
+            loadBalancer:
+                servers:
+                    - url: http://mailpit:8025
+
+tls:
+    certificates:
+        - certFile: /certs/bookingapp.local+1.pem
+          keyFile: /certs/bookingapp.local+1-key.pem
