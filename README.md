@@ -69,31 +69,6 @@ Administrators can:
 
 ---
 
-## Architecture
-
-```text
-Browser
-    │
-    ▼
-Traefik
-    │
-    ▼
-Nginx
-    │
-    ▼
-PHP-FPM
-    │
-    ▼
-Symfony
-    │
- ┌──┴─────────────┐
- ▼                ▼
-
-MariaDB         Redis
-```
-
----
-
 ## Local Domains
 
 The application uses HTTPS locally.
