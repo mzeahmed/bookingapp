@@ -25,6 +25,6 @@
 ###< Phpstorm / Intelijj ###
 
 ###> Other ###
-/symfony/docs/
+/docs/*.html
 /certs/*.pem
 ####< Other ###
