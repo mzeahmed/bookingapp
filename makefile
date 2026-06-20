@@ -8,11 +8,11 @@ YELLOW=\033[0;33m
 BLUE=\033[0;34m
 NO_COLOR=\033[0m
 
-setup: ## Configure le dépôt (git hooks, etc.)
+setup: ## Configure repository (git hooks, etc.)
 	git config core.hooksPath .githooks
-	@echo "$(GREEN)Git hooks configurés → .githooks$(NO_COLOR)"
+	@echo "$(GREEN)Git hooks configured -> .githooks$(NO_COLOR)"
 
-help: ## Affiche la liste des commandes disponibles
+help: ## Show available commands
 	@echo ""
 	@echo "Usage: make [target]"
 	@echo "--------------------------------------------"
@@ -20,48 +20,61 @@ help: ## Affiche la liste des commandes disponibles
 		| awk 'BEGIN {FS = ":.*?## "}; {printf " %-28s %s\n", $$1, $$2}'
 	@echo ""
 
-build: ## Build les conteneurs
-	@echo "$(YELLOW)Construction des conteneurs...$(NO_COLOR)"
+build: ## Build containers
+	@echo "$(YELLOW)Building containers...$(NO_COLOR)"
 	$(COMPOSE) build
-	@echo "$(GREEN)Conteneurs construits$(NO_COLOR)"
+	@echo "$(GREEN)Containers built$(NO_COLOR)"
 
-up: build ## Démarre les conteneurs
-	@echo "$(YELLOW)Démarrage des conteneurs...$(NO_COLOR)"
+up: build ## Start containers
+	@echo "$(YELLOW)Starting containers...$(NO_COLOR)"
 	$(COMPOSE) up -d
-	@echo "$(GREEN)Conteneurs démarrés$(NO_COLOR)"
+	@echo "$(GREEN)Containers started$(NO_COLOR)"
 	@echo "$(BLUE)Dashboard Traefik: http://localhost:8080${NO_COLOR}"
-	@echo "$(BLUE)URL de l'application: https://bookingapp.local${NO_COLOR}"
+	@echo "$(BLUE)Application URL: https://bookingapp.local${NO_COLOR}"
 
-down: ## Stop les conteneurs
-	@echo "$(YELLOW)Arrêt des conteneurs...$(NO_COLOR)"
+down: ## Stop containers
+	@echo "$(YELLOW)Stopping containers...$(NO_COLOR)"
 	$(COMPOSE) down
-	@echo "$(GREEN)Conteneurs arrêtés$(NO_COLOR)"
+	@echo "$(GREEN)Containers stopped$(NO_COLOR)"
 
-restart: down up ## Redémarre les conteneurs
+restart: down up ## Restart containers
 
-logs: ## Logs des conteneurs
-	@echo "$(YELLOW)Affichage des logs...$(NO_COLOR)"
+logs: ## Show container logs
+	@echo "$(YELLOW)Showing logs...$(NO_COLOR)"
 	$(COMPOSE) logs -f
 
-ps: ## Liste les conteneurs
-	@echo "$(YELLOW)Listing des conteneurs...$(NO_COLOR)"
+ps: ## List containers
+	@echo "$(YELLOW)Listing containers...$(NO_COLOR)"
 	$(COMPOSE) ps
 
-bash: ## Accède au container app
-	@echo "$(YELLOW)Accès au container app...$(NO_COLOR)"
+bash: ## Access app container
+	@echo "$(YELLOW)Accessing app container...$(NO_COLOR)"
 	docker exec -it $(APP_CONTAINER) bash
 
-pint: ## Lance Pint en mode test
-	@echo "$(YELLOW)Lancement de Pint...$(NO_COLOR)"
+pint: ## Run Pint in test mode
+	@echo "$(YELLOW)Running Pint...$(NO_COLOR)"
 	cd symfony && composer run lint
-	@echo "$(GREEN)Pint terminé$(NO_COLOR)"
+	@echo "$(GREEN)Pint completed$(NO_COLOR)"
 
-pintf: ## Lance Pint avec correction
-	@echo "$(YELLOW)Lancement de Pint avec correction...$(NO_COLOR)"
+pintf: ## Run Pint with auto-fix
+	@echo "$(YELLOW)Running Pint with fixes...$(NO_COLOR)"
 	cd symfony && composer run lint:fix
-	@echo "$(GREEN)Pint terminé$(NO_COLOR)"
+	@echo "$(GREEN)Pint completed$(NO_COLOR)"
 
-stan: ## Lance PHPStan
-	@echo "$(YELLOW)Lancement de PHPStan...$(NO_COLOR)"
+stan: ## Run PHPStan
+	@echo "$(YELLOW)Running PHPStan...$(NO_COLOR)"
 	./symfony/vendor/bin/phpstan analyse -c symfony/phpstan.neon
-	@echo "$(GREEN)PHPStan terminé$(NO_COLOR)"
+	@echo "$(GREEN)PHPStan completed$(NO_COLOR)"
+
+# ========================
+# Assets
+# ========================
+w: ## Run TypeScript watcher
+	@echo "$(YELLOW)Starting TypeScript watcher...$(NO_COLOR)"
+	php symfony/bin/console typescript:build --watch
+
+b: ## Build TypeScript assets
+	@echo "$(YELLOW)Building TypeScript assets...$(NO_COLOR)"
+	php symfony/bin/console typescript:build
+	php symfony/bin/console asset-map:compile
+	@echo "$(GREEN)Build completed$(NO_COLOR)"

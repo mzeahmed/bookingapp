@@ -37,7 +37,6 @@
         }
     },
     "exclude": [
-        ".docker",
         "node_modules",
         "public/build",
         "public/uploads",
