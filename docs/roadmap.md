@@ -1,0 +1,82 @@
+# Roadmap
+
+## Phase 1 - Foundation
+
+* [ ] Docker environment
+* [ ] Traefik setup
+* [ ] HTTPS local setup
+* [ ] Symfony installation
+* [ ] Doctrine setup
+* [ ] MariaDB setup
+
+---
+
+## Phase 2 - Authentication
+
+* [ ] User entity
+* [ ] Registration
+* [ ] Login
+* [ ] Logout
+* [ ] Email verification
+* [ ] Password reset
+
+---
+
+## Phase 3 - Room Management
+
+* [ ] Room entity
+* [ ] Equipment entity
+* [ ] CRUD rooms
+* [ ] Image uploads
+
+---
+
+## Phase 4 - Reservations
+
+* [ ] Reservation entity
+* [ ] Availability service
+* [ ] Reservation workflow
+* [ ] Cancellation workflow
+
+---
+
+## Phase 5 - Reviews
+
+* [ ] Review entity
+* [ ] Ratings
+* [ ] Review moderation
+
+---
+
+## Phase 6 - Notifications
+
+* [ ] Mailer integration
+* [ ] Messenger integration
+* [ ] Async emails
+
+---
+
+## Phase 7 - Administration
+
+* [ ] Admin dashboard
+* [ ] User management
+* [ ] Reservation management
+
+---
+
+## Phase 8 - Quality
+
+* [ ] PHPUnit
+* [ ] Functional tests
+* [ ] PHPStan level max
+* [ ] CI/CD
+
+---
+
+## Phase 9 - Advanced Symfony
+
+* [ ] Messenger transports
+* [ ] Cache
+* [ ] API Platform
+* [ ] Rate Limiter
+* [ ] Webhooks
