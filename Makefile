@@ -1,6 +1,8 @@
-.PHONY: help setup build up down logs bash migrate run-pipeline alerts fix-perms
+.PHONY: help setup hosts build up down logs bash migration migrate run-pipeline alerts fix-perms
 
 COMPOSE = docker compose -f docker-compose.yml
+
+DOMAINS = bookingapp.local mail.bookingapp.local db.bookingapp.local
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -11,6 +13,17 @@ NO_COLOR=\033[0m
 setup: ## Configure repository (git hooks, etc.)
 	git config core.hooksPath .githooks
 	@echo "$(GREEN)Git hooks configured -> .githooks$(NO_COLOR)"
+
+hosts: ## Add local domains to /etc/hosts (requires sudo)
+	@echo "$(YELLOW)Updating /etc/hosts...$(NO_COLOR)"
+	@for domain in $(DOMAINS); do \
+		if grep -qE "^127\.0\.0\.1[[:space:]]+$$domain$$" /etc/hosts; then \
+			echo "$(GREEN)$$domain already present$(NO_COLOR)"; \
+		else \
+			echo "127.0.0.1 $$domain" | sudo tee -a /etc/hosts > /dev/null; \
+			echo "$(GREEN)Added $$domain$(NO_COLOR)"; \
+		fi; \
+	done
 
 help: ## Show available commands
 	@echo ""
@@ -31,6 +44,8 @@ up: build ## Start containers
 	@echo "$(GREEN)Containers started$(NO_COLOR)"
 	@echo "$(BLUE)Dashboard Traefik: http://localhost:8080${NO_COLOR}"
 	@echo "$(BLUE)Application URL: https://bookingapp.local${NO_COLOR}"
+	@echo "$(BLUE)Mailpit URL: https://mail.bookingapp.local${NO_COLOR}"
+	@echo "$(BLUE)PhpMyAdmin URL: https://db.bookingapp.local${NO_COLOR}"
 
 down: ## Stop containers
 	@echo "$(YELLOW)Stopping containers...$(NO_COLOR)"
@@ -50,6 +65,16 @@ ps: ## List containers
 bash: ## Access app container
 	@echo "$(YELLOW)Accessing app container...$(NO_COLOR)"
 	docker exec -it $(APP_CONTAINER) bash
+
+migration: ## Generate a Doctrine migration from entity changes
+	@echo "$(YELLOW)Generating migration...$(NO_COLOR)"
+	$(COMPOSE) exec php php symfony/bin/console make:migration
+	@echo "$(GREEN)Migration generated$(NO_COLOR)"
+
+migrate: ## Run pending Doctrine migrations
+	@echo "$(YELLOW)Running migrations...$(NO_COLOR)"
+	$(COMPOSE) exec php php symfony/bin/console doctrine:migrations:migrate --no-interaction
+	@echo "$(GREEN)Migrations completed$(NO_COLOR)"
 
 pint: ## Run Pint in test mode
 	@echo "$(YELLOW)Running Pint...$(NO_COLOR)"

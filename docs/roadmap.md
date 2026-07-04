@@ -13,7 +13,7 @@
 
 ## Phase 2 - Authentication
 
-* [ ] User entity
+* [x] User entity
 * [ ] Registration
 * [ ] Login
 * [ ] Logout

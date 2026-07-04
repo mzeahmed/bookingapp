@@ -77,8 +77,8 @@ Available domains:
 
 ```text
 https://bookingapp.local
-https://admin.bookingapp.local
 https://mail.bookingapp.local
+https://db.bookingapp.local
 ```
 
 Traefik sits in front of the stack as a reverse proxy. It:
@@ -91,6 +91,9 @@ Traefik sits in front of the stack as a reverse proxy. It:
 
 This avoids exposing container ports directly and lets multiple services
 share ports 80/443 under different local domains.
+
+These domains do not resolve on their own: you need to edit `/etc/hosts` to
+point them to `127.0.0.1` (see [Configure Hosts](#configure-hosts)).
 
 ---
 
@@ -137,18 +140,20 @@ mkcert bookingapp.local "*.bookingapp.local"
 
 ### Configure Hosts
 
-Edit:
-
 ```bash
-/etc/hosts
+make hosts
 ```
 
-Add:
+This adds the required domains to `/etc/hosts` (asks for your `sudo`
+password) and is safe to run multiple times: entries already present are
+left untouched.
+
+To do it manually instead, edit `/etc/hosts` and add:
 
 ```text
 127.0.0.1 bookingapp.local
-127.0.0.1 admin.bookingapp.local
 127.0.0.1 mail.bookingapp.local
+127.0.0.1 db.bookingapp.local
 ```
 
 ### Start the Environment
