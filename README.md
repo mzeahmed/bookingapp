@@ -92,6 +92,9 @@ Traefik sits in front of the stack as a reverse proxy. It:
 This avoids exposing container ports directly and lets multiple services
 share ports 80/443 under different local domains.
 
+These domains do not resolve on their own: you need to edit `/etc/hosts` to
+point them to `127.0.0.1` (see [Configure Hosts](#configure-hosts)).
+
 ---
 
 ## Requirements

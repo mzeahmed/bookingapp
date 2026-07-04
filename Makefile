@@ -31,6 +31,8 @@ up: build ## Start containers
 	@echo "$(GREEN)Containers started$(NO_COLOR)"
 	@echo "$(BLUE)Dashboard Traefik: http://localhost:8080${NO_COLOR}"
 	@echo "$(BLUE)Application URL: https://bookingapp.local${NO_COLOR}"
+	@echo "$(BLUE)Mailpit URL: https://mail.bookingapp.local${NO_COLOR}"
+	@echo "$(BLUE)PhpMyAdmin URL: https://db.bookingapp.local${NO_COLOR}"
 
 down: ## Stop containers
 	@echo "$(YELLOW)Stopping containers...$(NO_COLOR)"
