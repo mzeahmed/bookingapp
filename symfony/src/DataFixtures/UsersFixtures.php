@@ -37,8 +37,8 @@ class UsersFixtures
                  ->setPassword($this->hasher->hashPassword($user, $password))
                  ->setFirstname($firstname)
                  ->setLastname($lastname)
-                ->setCreatedAt(new \DateTimeImmutable())
-                ->setUpdatedAt(new \DateTimeImmutable())
+                 ->setCreatedAt(new \DateTimeImmutable())
+                 ->setUpdatedAt(new \DateTimeImmutable())
                  ->setIsVerified(true);
 
             $manager->persist($user);
