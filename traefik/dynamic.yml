@@ -1,40 +1,40 @@
 http:
-    routers:
-        bookingapp:
-            rule: Host(`bookingapp.local`)
-            entryPoints:
-                - web
-                - websecure
-            service: bookingapp
-            tls: {}
-        mailpit:
-            rule: Host(`mail.bookingapp.local`)
-            entryPoints:
-                - web
-                - websecure
-            service: mailpit
-            tls: {}
-        phpmyadmin:
-            rule: Host(`db.bookingapp.local`)
-            entryPoints:
-                - websecure
-            service: phpmyadmin
-            tls: {}
-    services:
-        bookingapp:
-            loadBalancer:
-                servers:
-                    - url: http://nginx:80
-        mailpit:
-            loadBalancer:
-                servers:
-                    - url: http://mailpit:8025
-        phpmyadmin:
-            loadBalancer:
-                servers:
-                    - url: http://phpmyadmin:80
+  routers:
+    bookingapp:
+      rule: Host(`bookingapp.local`)
+      entryPoints:
+        - web
+        - websecure
+      service: bookingapp
+      tls: { }
+    mailpit:
+      rule: Host(`mail.bookingapp.local`)
+      entryPoints:
+        - web
+        - websecure
+      service: mailpit
+      tls: { }
+    phpmyadmin:
+      rule: Host(`db.bookingapp.local`)
+      entryPoints:
+        - websecure
+      service: phpmyadmin
+      tls: { }
+  services:
+    bookingapp:
+      loadBalancer:
+        servers:
+          - url: http://nginx:80
+    mailpit:
+      loadBalancer:
+        servers:
+          - url: http://mailpit:8025
+    phpmyadmin:
+      loadBalancer:
+        servers:
+          - url: http://phpmyadmin:80
 
 tls:
-    certificates:
-        - certFile: /certs/bookingapp.local+1.pem
-          keyFile: /certs/bookingapp.local+1-key.pem
+  certificates:
+    - certFile: /certs/bookingapp.local+1.pem
+      keyFile: /certs/bookingapp.local+1-key.pem

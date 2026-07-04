@@ -2,6 +2,13 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
+    # Traefik terminates TLS and forwards plain HTTP to nginx/php on the
+    # Docker network, so trust its X-Forwarded-* headers to detect HTTPS
+    # correctly (otherwise generated URLs use http:// and break things like
+    # the web debug toolbar behind HTTPS).
+    trusted_proxies: '10.0.0.0/8,172.16.0.0/12,192.168.0.0/16'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-prefix']
+
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
