@@ -81,7 +81,16 @@ https://admin.bookingapp.local
 https://mail.bookingapp.local
 ```
 
-Traefik handles routing and SSL termination.
+Traefik sits in front of the stack as a reverse proxy. It:
+
+* Terminates HTTPS using the local certificates generated with mkcert.
+* Redirects all HTTP traffic to HTTPS.
+* Routes each domain to the right container based on Host rules declared as
+  Docker labels in `docker-compose.yml` (e.g. `bookingapp.local` -> nginx,
+  `mail.bookingapp.local` -> Mailpit).
+
+This avoids exposing container ports directly and lets multiple services
+share ports 80/443 under different local domains.
 
 ---
 

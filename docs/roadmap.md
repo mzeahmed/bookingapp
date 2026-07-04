@@ -2,12 +2,12 @@
 
 ## Phase 1 - Foundation
 
-* [ ] Docker environment
-* [ ] Traefik setup
-* [ ] HTTPS local setup
-* [ ] Symfony installation
-* [ ] Doctrine setup
-* [ ] MariaDB setup
+* [x] Docker environment
+* [x] Traefik setup
+* [x] HTTPS local setup
+* [x] Symfony installation
+* [x] Doctrine setup
+* [x] MariaDB setup
 
 ---
 

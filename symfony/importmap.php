@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Returns the importmap for this application.
  *
@@ -25,25 +27,25 @@
 return [
     'app' => [
         'path' => './assets/app.js',
-        'entrypoint' => true
+        'entrypoint' => true,
     ],
     '@hotwired/stimulus' => [
-        'version' => '3.2.2'
+        'version' => '3.2.2',
     ],
     '@symfony/stimulus-bundle' => [
-        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'
+        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.23'
+        'version' => '8.0.23',
     ],
     'bootstrap' => [
-        'version' => '5.3.8'
+        'version' => '5.3.8',
     ],
     '@popperjs/core' => [
-        'version' => '2.11.8'
+        'version' => '2.11.8',
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
         'version' => '5.3.8',
-        'type' => 'css'
+        'type' => 'css',
     ],
 ];
