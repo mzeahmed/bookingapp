@@ -76,6 +76,11 @@ migrate: ## Run pending Doctrine migrations
 	$(COMPOSE) exec php php symfony/bin/console doctrine:migrations:migrate --no-interaction
 	@echo "$(GREEN)Migrations completed$(NO_COLOR)"
 
+fixtures: ## Load fixtures into the database
+	@echo "$(YELLOW)Loading fixtures...$(NO_COLOR)"
+	$(COMPOSE) exec php php symfony/bin/console doctrine:fixtures:load --no-interaction
+	@echo "$(GREEN)Fixtures loaded$(NO_COLOR)"
+
 pint: ## Run Pint in test mode
 	@echo "$(YELLOW)Running Pint...$(NO_COLOR)"
 	cd symfony && composer run lint
