@@ -1,6 +1,8 @@
-.PHONY: help setup build up down logs bash migrate run-pipeline alerts fix-perms
+.PHONY: help setup hosts build up down logs bash migrate run-pipeline alerts fix-perms
 
 COMPOSE = docker compose -f docker-compose.yml
+
+DOMAINS = bookingapp.local mail.bookingapp.local db.bookingapp.local
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -11,6 +13,17 @@ NO_COLOR=\033[0m
 setup: ## Configure repository (git hooks, etc.)
 	git config core.hooksPath .githooks
 	@echo "$(GREEN)Git hooks configured -> .githooks$(NO_COLOR)"
+
+hosts: ## Add local domains to /etc/hosts (requires sudo)
+	@echo "$(YELLOW)Updating /etc/hosts...$(NO_COLOR)"
+	@for domain in $(DOMAINS); do \
+		if grep -qE "^127\.0\.0\.1[[:space:]]+$$domain$$" /etc/hosts; then \
+			echo "$(GREEN)$$domain already present$(NO_COLOR)"; \
+		else \
+			echo "127.0.0.1 $$domain" | sudo tee -a /etc/hosts > /dev/null; \
+			echo "$(GREEN)Added $$domain$(NO_COLOR)"; \
+		fi; \
+	done
 
 help: ## Show available commands
 	@echo ""
