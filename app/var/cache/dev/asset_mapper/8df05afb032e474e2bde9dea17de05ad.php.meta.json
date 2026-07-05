@@ -1,0 +1,1 @@
+{"resources":[{"@type":"Symfony\\Component\\Config\\Resource\\FileResource","resource":"/home/ahmed/workspace/www/bookingapp/symfony/assets/stimulus_bootstrap.js"},{"@type":"Symfony\\Component\\Config\\Resource\\FileExistenceResource","resource":"/home/ahmed/workspace/www/bookingapp/symfony/vendor/symfony/stimulus-bundle/assets/dist/loader.js","exists":true}]}

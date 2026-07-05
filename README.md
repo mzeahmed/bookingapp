@@ -332,7 +332,7 @@ bookingapp/
 │
 ├── docs/
 │
-├── symfony/
+├── app/
 │   ├── config/
 │   ├── migrations/
 │   ├── public/

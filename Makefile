@@ -68,32 +68,32 @@ bash: ## Access app container
 
 migration: ## Generate a Doctrine migration from entity changes
 	@echo "$(YELLOW)Generating migration...$(NO_COLOR)"
-	$(COMPOSE) exec php php symfony/bin/console make:migration
+	$(COMPOSE) exec php php app/bin/console make:migration
 	@echo "$(GREEN)Migration generated$(NO_COLOR)"
 
 migrate: ## Run pending Doctrine migrations
 	@echo "$(YELLOW)Running migrations...$(NO_COLOR)"
-	$(COMPOSE) exec php php symfony/bin/console doctrine:migrations:migrate --no-interaction
+	$(COMPOSE) exec php php app/bin/console doctrine:migrations:migrate --no-interaction
 	@echo "$(GREEN)Migrations completed$(NO_COLOR)"
 
 fixtures: ## Load fixtures into the database
 	@echo "$(YELLOW)Loading fixtures...$(NO_COLOR)"
-	$(COMPOSE) exec php php symfony/bin/console doctrine:fixtures:load --no-interaction
+	$(COMPOSE) exec php php app/bin/console doctrine:fixtures:load --no-interaction
 	@echo "$(GREEN)Fixtures loaded$(NO_COLOR)"
 
 pint: ## Run Pint in test mode
 	@echo "$(YELLOW)Running Pint...$(NO_COLOR)"
-	cd symfony && composer run lint
+	cd app && composer run lint
 	@echo "$(GREEN)Pint completed$(NO_COLOR)"
 
 pintf: ## Run Pint with auto-fix
 	@echo "$(YELLOW)Running Pint with fixes...$(NO_COLOR)"
-	cd symfony && composer run lint:fix
+	cd app && composer run lint:fix
 	@echo "$(GREEN)Pint completed$(NO_COLOR)"
 
 stan: ## Run PHPStan
 	@echo "$(YELLOW)Running PHPStan...$(NO_COLOR)"
-	./symfony/vendor/bin/phpstan analyse -c symfony/phpstan.neon
+	./app/vendor/bin/phpstan analyse -c symfappony/phpstan.neon
 	@echo "$(GREEN)PHPStan completed$(NO_COLOR)"
 
 # ========================
@@ -101,10 +101,10 @@ stan: ## Run PHPStan
 # ========================
 w: ## Run TypeScript watcher
 	@echo "$(YELLOW)Starting TypeScript watcher...$(NO_COLOR)"
-	php symfony/bin/console typescript:build --watch
+	php app/bin/console typescript:build --watch
 
 b: ## Build TypeScript assets
 	@echo "$(YELLOW)Building TypeScript assets...$(NO_COLOR)"
-	php symfony/bin/console typescript:build
-	php symfony/bin/console asset-map:compile
+	php app/bin/console typescript:build
+	php app/bin/console asset-map:compile
 	@echo "$(GREEN)Build completed$(NO_COLOR)"
