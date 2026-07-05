@@ -17,7 +17,7 @@
 * [x] Registration
 * [x] Login
 * [x] Logout
-* [ ] Email verification
+* [x] Email verification
 * [ ] Password reset
 
 ---
