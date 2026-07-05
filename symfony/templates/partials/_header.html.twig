@@ -1,0 +1,38 @@
+<!-- Header Navigation -->
+<header id="header" class="fixed-top border-bottom">
+    <div class="container-xl px-4">
+        <div class="d-flex justify-content-between align-items-center" style="height: 80px;">
+
+            <!-- Logo -->
+            <div class="d-flex align-items-center flex-shrink-0" style="cursor: pointer;">
+                <div class="d-flex align-items-center justify-content-center rounded-2 me-3 bg-primary-app" style="width: 32px; height: 32px;">
+                    <i class="fa-solid fa-layer-group text-white" style="font-size: 14px;"></i>
+                </div>
+                <span class="fw-bold fs-5 tracking-tight text-app">Bookingapp</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <nav class="d-none d-md-flex gap-4">
+                <a href="#" class="nav-link-app">Link 1</a>
+                <a href="#" class="nav-link-muted">Link 2</a>
+                <a href="#" class="nav-link-muted">Link 3</a>
+                <a href="#" class="nav-link-muted">Link 4</a>
+            </nav>
+
+            <!-- Auth Buttons -->
+            <div class="d-none d-md-flex align-items-center gap-2">
+                {% if not app.user %}
+                    <a href="{{ path('app_login') }}" class="btn-login">Log in</a>
+                    <a href="#" class="btn-signup">Sign up</a>
+                {% endif %}
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="d-md-none">
+                <button class="btn p-2 border-0 text-app">
+                    <i class="fa-solid fa-bars fs-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
