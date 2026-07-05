@@ -13,6 +13,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UsersFixtures
 {
     private Generator $faker;
+
+    /** @var list<string> */
     private array $genres;
 
     public function __construct(
@@ -48,7 +50,7 @@ class UsersFixtures
     }
 
     /**
-     * @return array[]
+     * @return list<array{0: string, 1: list<string>, 2: string, 3: string, 4: string}>
      */
     private function getUserData(): array
     {
@@ -67,6 +69,9 @@ class UsersFixtures
         return $users;
     }
 
+    /**
+     * @return list<array{email: string, roles: list<string>, password: string, firstname: string, lastname: string}>
+     */
     private function generateUsers(): array
     {
         $users = [];
