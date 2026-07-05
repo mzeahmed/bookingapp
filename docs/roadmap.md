@@ -14,7 +14,7 @@
 ## Phase 2 - Authentication
 
 * [x] User entity
-* [ ] Registration
+* [x] Registration
 * [x] Login
 * [x] Logout
 * [ ] Email verification
