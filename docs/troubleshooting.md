@@ -163,3 +163,103 @@ curl -sk -D - -o /dev/null https://bookingapp.local/ | grep x-debug-token-link
 Symfony Trusting Proxies Documentation:
 
 https://symfony.com/doc/current/deployment/proxies.html
+
+---
+
+## Registration Confirmation Email Never Arrives
+
+Date discovered: 2026-07-05
+Environment: Local Development
+Status: Resolved
+
+### Symptom
+
+`bin/console mailer:test` delivers mail to Mailpit instantly, but the
+"Please Confirm your Email" message sent from
+`RegistrationController::register()` (via `EmailVerifier::sendEmailConfirmation()`)
+never shows up in Mailpit, with no error surfaced to the user.
+
+### Investigation
+
+`MAILER_DSN` was correctly set to `smtp://mailpit:1025` (the container
+network hostname, not `127.0.0.1`). Checking `config/packages/messenger.yaml`
+revealed:
+
+```yaml
+routing:
+    Symfony\Component\Mailer\Messenger\SendEmailMessage: async
+```
+
+This routes every `SendEmailMessage` (i.e. every call to
+`MailerInterface::send()`) through the Messenger `async` transport instead
+of sending it directly. The `async` transport DSN was:
+
+```
+MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+```
+
+a Doctrine-backed queue table (`messenger_messages`). No process in
+`docker-compose.yml` (and no background process inside the `php` container)
+runs `messenger:consume async`, so nothing ever drains that queue. Querying
+the table confirmed emails piling up undelivered:
+
+```sql
+SELECT id, queue_name, created_at, delivered_at FROM messenger_messages;
+```
+
+```
+id | queue_name | created_at          | delivered_at
+1  | default    | 2026-07-05 15:49:55 | NULL
+2  | default    | 2026-07-05 16:17:18 | NULL
+```
+
+### Root Cause
+
+Emails were not lost or misconfigured — they were queued into
+`messenger_messages` by the `SendEmailMessage: async` routing rule and sat
+there forever because no Messenger worker consumes the `async` transport in
+this environment.
+
+### Fix
+
+Removed the `SendEmailMessage: async` routing rule from
+`config/packages/messenger.yaml`, so mail sends happen synchronously again
+(same behavior as `mailer:test`):
+
+```yaml
+routing:
+    Symfony\Component\Notifier\Message\ChatMessage: async
+    Symfony\Component\Notifier\Message\SmsMessage: async
+```
+
+Verified by re-running `mailer:test` and confirming the `messenger_messages`
+row count stayed the same (no new row queued) while the mail appeared in
+Mailpit immediately.
+
+If async email sending is wanted later (e.g. to avoid blocking the HTTP
+request on SMTP), re-add the routing rule *and* run a worker, either as a
+`docker-compose.yml` service or manually:
+
+```bash
+docker compose exec php php symfony/bin/console messenger:consume async
+```
+
+### Lessons Learned
+
+1. Routing a message class to an `async` transport is silent at runtime —
+   nothing fails, the message just queues. Always confirm a consumer is
+   actually running before relying on `messenger.yaml` routing.
+2. `debug:messenger` shows *what handles* a message class but not whether a
+   worker is consuming its transport — check `docker compose ps` / running
+   processes, or query the transport's storage directly (e.g.
+   `messenger_messages` for the Doctrine transport).
+3. When "the test command works but the app doesn't," suspect a difference
+   in how each path invokes the shared service (here: both call
+   `MailerInterface::send()`, so the divergence had to be in routing/config,
+   not the mailer transport itself).
+
+### References
+
+Symfony Messenger Documentation:
+
+https://symfony.com/doc/current/messenger.html
