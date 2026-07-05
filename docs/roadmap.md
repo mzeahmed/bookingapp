@@ -16,7 +16,7 @@
 * [x] User entity
 * [ ] Registration
 * [x] Login
-* [ ] Logout
+* [x] Logout
 * [ ] Email verification
 * [ ] Password reset
 
