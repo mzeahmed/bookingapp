@@ -25,11 +25,11 @@ class ApplicationType extends AbstractType
      *
      * @param string|bool $label field label, or false to disable it
      * @param string $placeholder placeholder text for the 'attr' option
-     * @param array $options additional field options to merge in
+     * @param array<string, mixed> $options additional field options to merge in
      *
-     * @return array the merged field options, ready to pass to $builder->add()
+     * @return array<string, mixed> the merged field options, ready to pass to $builder->add()
      */
-    protected function getConfiguration(string | bool $label, string $placeholder, array $options = []): array
+    protected function getConfiguration(string|bool $label, string $placeholder, array $options = []): array
     {
         return array_merge_recursive([
             'label' => $label,
