@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\Rooms;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Room;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
- * @extends ServiceEntityRepository<Rooms>
+ * @extends ServiceEntityRepository<Room>
  */
 class RoomsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Rooms::class);
+        parent::__construct($registry, Room::class);
     }
 
     //    /**

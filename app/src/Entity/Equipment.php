@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EquipmentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EquipmentRepository::class)]
 class Equipment
@@ -32,9 +32,9 @@ class Equipment
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
-     * @var Collection<int, Rooms>
+     * @var Collection<int, Room>
      */
-    #[ORM\ManyToMany(targetEntity: Rooms::class, inversedBy: 'equipment')]
+    #[ORM\ManyToMany(targetEntity: Room::class, inversedBy: 'equipment')]
     private Collection $rooms;
 
     public function __construct()
@@ -108,14 +108,14 @@ class Equipment
     }
 
     /**
-     * @return Collection<int, Rooms>
+     * @return Collection<int, Room>
      */
     public function getRooms(): Collection
     {
         return $this->rooms;
     }
 
-    public function addRoom(Rooms $room): static
+    public function addRoom(Room $room): static
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms->add($room);
@@ -124,7 +124,7 @@ class Equipment
         return $this;
     }
 
-    public function removeRoom(Rooms $room): static
+    public function removeRoom(Room $room): static
     {
         $this->rooms->removeElement($room);
 

@@ -9,7 +9,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: RoomsRepository::class)]
-class Rooms
+#[ORM\Table(name: 'room')]
+class Room
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
