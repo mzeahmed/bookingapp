@@ -34,10 +34,10 @@ Review
 
 ## Tables
 
-### users
+### user
 
 | Column      | Type     |
-| ----------- | -------- |
+|-------------|----------|
 | id          | UUID     |
 | email       | VARCHAR  |
 | password    | VARCHAR  |
@@ -50,10 +50,10 @@ Review
 
 ---
 
-### rooms
+### room
 
 | Column       | Type     |
-| ------------ | -------- |
+|--------------|----------|
 | id           | UUID     |
 | name         | VARCHAR  |
 | description  | TEXT     |
@@ -67,10 +67,21 @@ Review
 
 ---
 
-### reservations
+### equipment
 
 | Column      | Type     |
-| ----------- | -------- |
+|-------------|----------|
+| id          | UUID     |
+| name        | VARCHAR  |
+| description | VARCHAR  |
+| icon        | VARCHAR  |
+| created_at  | DATETIME |
+| updated_at  | DATETIME |
+
+### reservation
+
+| Column      | Type     |
+|-------------|----------|
 | id          | UUID     |
 | room_id     | UUID     |
 | user_id     | UUID     |
@@ -88,10 +99,10 @@ Status values:
 
 ---
 
-### reviews
+### review
 
 | Column  | Type |
-| ------- | ---- |
+|---------|------|
 | id      | UUID |
 | room_id | UUID |
 | user_id | UUID |

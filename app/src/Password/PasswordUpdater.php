@@ -19,7 +19,9 @@ final class PasswordUpdater
     public function __invoke(User $user, string $newPassword): void
     {
         $hash = $this->hasher->hashPassword($user, $newPassword);
+
         $user->setPassword($hash);
+        $user->setResetPasswordToken(null);
 
         $this->em->persist($user);
         $this->em->flush();
