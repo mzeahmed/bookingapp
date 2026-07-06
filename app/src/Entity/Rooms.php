@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\RoomsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RoomsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: RoomsRepository::class)]
 class Rooms
@@ -40,6 +42,17 @@ class Rooms
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    /**
+     * @var Collection<int, Equipment>
+     */
+    #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'rooms')]
+    private Collection $equipments;
+
+    public function __construct()
+    {
+        $this->equipments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +163,33 @@ class Rooms
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+            $equipment->addRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        if ($this->equipments->removeElement($equipment)) {
+            $equipment->removeRoom($this);
+        }
 
         return $this;
     }

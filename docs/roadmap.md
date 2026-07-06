@@ -24,7 +24,7 @@
 
 ## Phase 3 - Room Management
 
-* [ ] Room entity
+* [x] Room entity
 * [ ] Equipment entity
 * [ ] CRUD rooms
 * [ ] Image uploads
