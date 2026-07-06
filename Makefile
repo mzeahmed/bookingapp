@@ -93,7 +93,7 @@ pintf: ## Run Pint with auto-fix
 
 stan: ## Run PHPStan
 	@echo "$(YELLOW)Running PHPStan...$(NO_COLOR)"
-	./app/vendor/bin/phpstan analyse -c symfappony/phpstan.neon
+	./app/vendor/bin/phpstan analyse -c app/phpstan.neon
 	@echo "$(GREEN)PHPStan completed$(NO_COLOR)"
 
 # ========================
