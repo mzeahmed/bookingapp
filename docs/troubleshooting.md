@@ -263,3 +263,169 @@ docker compose exec php php symfony/bin/console messenger:consume async
 Symfony Messenger Documentation:
 
 https://symfony.com/doc/current/messenger.html
+
+---
+
+## Form Field Errors Don't Appear to Display
+
+Date discovered: 2026-07-06
+Environment: Local Development
+Status: Resolved
+
+### Symptom
+
+On `password/lost-password.html.twig`, submitting an email address that
+doesn't match any user should show "No user found for this email" next to
+the field (added via `$form->get('email')->addError(...)` in
+`PasswordController::lost()`). Visually, nothing appeared to happen after
+clicking submit — the page looked identical to before submission.
+
+### Investigation
+
+A functional test (`Symfony\Bundle\FrameworkBundle\Test\WebTestCase`)
+submitting the form with a non-existent email confirmed the server-side
+behavior was actually correct: HTTP 200, and the response body did contain
+the error:
+
+```html
+<ul><li id="lost_password_email_error1">No user found for this email</li></ul>
+```
+
+The `<ul>`/`<li>` carry no CSS classes at all — this is Symfony's default
+form theme (`form_div_layout.html.twig`), not a Bootstrap-aware one.
+
+### Root Cause
+
+`config/packages/twig.yaml` had no `form_themes` configured, so
+`form_errors()` rendered with zero styling. Next to the app's custom
+`form-control-custom` inputs, the plain unstyled bullet list was
+effectively invisible, giving the impression that the error never
+displayed.
+
+### Fix
+
+Enable the Bootstrap 5 form theme so `form_errors()` / `form_widget()`
+render with `invalid-feedback` / `is-invalid` classes automatically,
+without changing any existing template markup:
+
+```yaml
+# config/packages/twig.yaml
+twig:
+    file_name_pattern: '*.twig'
+    form_themes: ['bootstrap_5_layout.html.twig']
+
+when@test:
+    twig:
+        strict_variables: true
+```
+
+Verified by re-submitting the lost-password form with an unknown email and
+confirming the error now renders inside a styled `invalid-feedback` block.
+
+### Lessons Learned
+
+1. A 200 response with the right content in the HTML doesn't mean the user
+   can *see* it — always check the actual rendered styling, not just
+   presence in the DOM.
+2. Any Symfony project styling forms with Bootstrap should set
+   `twig.form_themes` explicitly; without it, `form_errors`/`form_widget`
+   silently fall back to the unstyled default theme.
+3. To reproduce a "nothing happens on submit" report without a browser,
+   drive the controller directly with `WebTestCase` (`browser-kit` +
+   `dom-crawler`, already in `vendor/`) — it separates "the request isn't
+   being processed" from "the response looks wrong."
+
+### References
+
+Symfony Form Theming Documentation:
+
+https://symfony.com/doc/current/form/form_themes.html
+
+---
+
+## Form Error Still Doesn't Display After Fixing the Form Theme (Turbo Blocks the Response)
+
+Date discovered: 2026-07-06
+Environment: Local Development
+Status: Resolved
+
+### Symptom
+
+Even after enabling `form_themes: ['bootstrap_5_layout.html.twig']` (see
+previous entry), submitting `password/lost-password.html.twig` with an
+email that fails validation in `PasswordController::lost()` (unknown
+email, or an unverified account) still showed no error at all — the page
+looked frozen, exactly as before the CSS fix.
+
+### Investigation
+
+Testing with a real browser (Playwright driving the existing Chrome
+install, since the earlier `WebTestCase` functional test only proves the
+HTML is correct, not that the browser renders it) surfaced a console
+error on submit:
+
+```
+Error: Form responses must redirect to another location
+    at .../@hotwired/turbo/turbo.index-*.js
+```
+
+The network request succeeded (200, with the correct `invalid-feedback`
+markup in the body) but Turbo Drive (`symfony/ux-turbo`) discarded the
+response entirely instead of rendering it.
+
+### Root Cause
+
+Turbo Drive requires that a response to a non-GET form submission is
+either a redirect, or a 4xx/5xx status (the Rails/Turbo convention for
+"re-render the form with validation errors"). `PasswordController::lost()`
+returned a plain `200` when re-rendering the form with an error attached
+via `$form->get('email')->addError(...)`. Turbo's client-side guard
+rejects any 2xx response to a form submission that isn't a redirect, so
+it silently aborted the render — no console-visible failure beyond the
+one thrown error, no visual change on the page.
+
+### Fix
+
+Return `422 Unprocessable Entity` instead of `200` whenever the form is
+re-rendered because of a validation/business-rule error (not a redirect):
+
+```php
+return $this->render('password/lost-password.html.twig', [
+    'form' => $form->createView(),
+], new Response(status: 422));
+```
+
+Applied both to the "no user found for this email" fallthrough at the end
+of the action and to the early-return "email not verified" branch. Every
+`return $this->render(...)` for the *same request* that produced the form
+submission needs this status — not just the last one in the method.
+
+Verified with Playwright: submitting an unknown email now shows
+`is-invalid` on the input and the red `invalid-feedback` message, and the
+Symfony debug toolbar confirms the request completed as `422`.
+
+### Lessons Learned
+
+1. When `symfony/ux-turbo` (or any Turbo Drive setup) is installed, every
+   controller action that re-renders a form with errors on the same
+   request must return a non-2xx status (422 is the convention) — a plain
+   `200` gets silently discarded by Turbo, not by the CSS or the template.
+2. A `WebTestCase` functional test proves the server produced the right
+   HTML; it does **not** prove the browser will display it. Turbo/Stimulus
+   behavior only shows up when actually driving a browser — use
+   `playwright-core` against the existing `google-chrome` binary
+   (`chromium.launch({ executablePath: '/usr/bin/google-chrome' })`) when
+   no project browser-automation tool is set up yet.
+3. Always check `console --errors` / the page console after a form submit
+   before concluding the fix worked — this failure mode produces no HTTP
+   error and no PHP exception, only a client-side console error.
+4. If a controller has more than one `return $this->render(...)` for the
+   same "form submitted with errors" situation, fixing the status on one
+   and forgetting the others reproduces this exact bug — grep the action
+   for every early-return render when applying this fix.
+
+### References
+
+Turbo Drive - Handling Form Submissions:
+
+https://turbo.hotwired.dev/handbook/drive#form-submissions
