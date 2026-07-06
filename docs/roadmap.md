@@ -18,7 +18,7 @@
 * [x] Login
 * [x] Logout
 * [x] Email verification
-* [ ] Password reset
+* [x] Password reset
 
 ---
 
