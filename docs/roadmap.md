@@ -58,8 +58,8 @@
 
 ## Phase 7 - Administration
 
-* [ ] Admin dashboard
-* [ ] User management
+* [x] Admin dashboard
+* [x] User management
 * [ ] Reservation management
 
 ---
