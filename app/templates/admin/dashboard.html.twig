@@ -1,0 +1,80 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Dashboard{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-muted">Users</div>
+                    <div class="fs-1">{{ usersCount }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-muted">Rooms</div>
+                    <div class="fs-1">{{ roomsCount }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-muted">Equipment</div>
+                    <div class="fs-1">{{ equipmentCount }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="content-panel">
+                <h3 class="content-panel-header">Latest users</h3>
+                <div class="content-panel-body without-padding">
+                    <table class="table datagrid">
+                        <thead>
+                            <tr><th>Email</th><th>Created at</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for user in latestUsers %}
+                                <tr>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.createdAt ? user.createdAt|date('d/m/Y') : '' }}</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="2">No users.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="content-panel">
+                <h3 class="content-panel-header">Latest rooms</h3>
+                <div class="content-panel-body without-padding">
+                    <table class="table datagrid">
+                        <thead>
+                            <tr><th>Name</th><th>City</th><th>Created at</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for room in latestRooms %}
+                                <tr>
+                                    <td>{{ room.name }}</td>
+                                    <td>{{ room.city }}</td>
+                                    <td>{{ room.createdAt ? room.createdAt|date('d/m/Y') : '' }}</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="3">No rooms.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

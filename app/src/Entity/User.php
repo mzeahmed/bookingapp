@@ -54,6 +54,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resetPasswordToken = null;
 
+    /**
+     * Not persisted: used to carry a new plaintext password from the admin form to the hasher.
+     */
+    private ?string $plainPassword = null;
+
     #[ORM\PrePersist]
     public function initTimestamps(): void
     {
@@ -212,6 +217,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetPasswordToken(?string $resetPasswordToken): static
     {
         $this->resetPasswordToken = $resetPasswordToken;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

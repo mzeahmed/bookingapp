@@ -16,6 +16,14 @@ class RoomsRepository extends ServiceEntityRepository
         parent::__construct($registry, Room::class);
     }
 
+    /**
+     * @return list<Room>
+     */
+    public function findLatest(int $limit): array
+    {
+        return $this->findBy([], ['createdAt' => 'DESC'], $limit);
+    }
+
     //    /**
     //     * @return Rooms[] Returns an array of Rooms objects
     //     */

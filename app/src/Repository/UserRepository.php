@@ -35,6 +35,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @return list<User>
+     */
+    public function findLatest(int $limit): array
+    {
+        return $this->findBy([], ['createdAt' => 'DESC'], $limit);
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */
