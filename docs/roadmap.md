@@ -22,25 +22,45 @@
 
 ---
 
-## Phase 3 - Room Management
+## Phase 3 - Host Portal
 
 * [x] Room entity
 * [x] Equipment entity
-* [ ] CRUD rooms
-* [ ] Image uploads
+
+### Host dashboard
+
+- [ ] Dashboard homepage
+- [ ] Create room
+- [ ] Edit room
+- [ ] Delete room
+- [ ] Room gallery
+- [ ] Image uploads
+- [ ] Room status (Draft / Published)
+- [ ] Amenities management
+
+## Phase 4 - Marketplace
+
+- [ ] Homepage
+- [ ] Room listing
+- [ ] Search
+- [ ] Filters
+- [ ] Room details
+- [ ] Favorite rooms
 
 ---
 
-## Phase 4 - Reservations
+## Phase 5 - Booking
 
-* [ ] Reservation entity
-* [ ] Availability service
-* [ ] Reservation workflow
-* [ ] Cancellation workflow
+- [ ] Reservation entity
+- [ ] Booking calendar
+- [ ] Availability service
+- [ ] Booking workflow
+- [ ] Cancellation workflow
+- [ ] Booking confirmation
 
 ---
 
-## Phase 5 - Reviews
+## Phase 6 - Reviews
 
 * [ ] Review entity
 * [ ] Ratings
@@ -48,7 +68,7 @@
 
 ---
 
-## Phase 6 - Notifications
+## Phase 7 - Notifications
 
 * [ ] Mailer integration
 * [ ] Messenger integration
@@ -56,7 +76,7 @@
 
 ---
 
-## Phase 7 - Administration
+## Phase 8 - Administration
 
 * [x] Admin dashboard
 * [x] User management
@@ -64,7 +84,7 @@
 
 ---
 
-## Phase 8 - Quality
+## Phase 9 - Quality
 
 * [ ] PHPUnit
 * [ ] Functional tests
@@ -73,10 +93,13 @@
 
 ---
 
-## Phase 9 - Advanced Symfony
+## Phase 10 - Advanced Symfony
 
-* [ ] Messenger transports
-* [ ] Cache
-* [ ] API Platform
-* [ ] Rate Limiter
-* [ ] Webhooks
+- [ ] Messenger transports
+- [ ] Cache
+- [ ] API Platform
+- [ ] Mercure
+- [ ] Rate Limiter
+- [ ] Lock
+- [ ] Scheduler
+- [ ] Webhooks

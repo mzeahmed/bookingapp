@@ -7,6 +7,7 @@ http:
         - websecure
       service: bookingapp
       tls: { }
+          
     mailpit:
       rule: Host(`mail.bookingapp.local`)
       entryPoints:
@@ -14,21 +15,25 @@ http:
         - websecure
       service: mailpit
       tls: { }
+
     phpmyadmin:
       rule: Host(`db.bookingapp.local`)
       entryPoints:
         - websecure
       service: phpmyadmin
       tls: { }
+
   services:
     bookingapp:
       loadBalancer:
         servers:
           - url: http://nginx:80
+
     mailpit:
       loadBalancer:
         servers:
           - url: http://mailpit:8025
+
     phpmyadmin:
       loadBalancer:
         servers:
