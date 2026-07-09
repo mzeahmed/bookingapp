@@ -1,5 +1,12 @@
 # BookingApp
 
+[![PHP Version](https://img.shields.io/badge/PHP-8.4+-777BB4?logo=php&logoColor=white)](https://github.com/mzeahmed/bookingapp/blob/main/app/composer.json)
+[![Symfony](https://img.shields.io/badge/Symfony-8.0-000000?logo=symfony&logoColor=white)](https://symfony.com)
+[![MariaDB](https://img.shields.io/badge/MariaDB-11-003545?logo=mariadb&logoColor=white)](https://mariadb.org)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com)
+[![Traefik](https://img.shields.io/badge/Traefik-v3-24A1C1?logo=traefikproxy&logoColor=white)](https://traefik.io)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
+
 A modern room and workspace booking platform built with Symfony.
 
 The project is designed as a real-world application to practice advanced Symfony concepts including:

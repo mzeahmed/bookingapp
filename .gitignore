@@ -25,6 +25,5 @@
 ###< Phpstorm / Intelijj ###
 
 ###> Other ###
-/docs/*.html
 /certs/*.pem
 ####< Other ###
