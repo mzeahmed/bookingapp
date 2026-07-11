@@ -1,0 +1,48 @@
+{% extends 'host/_layout.html.twig' %}
+
+{% block title %}Room gallery - {% endblock %}
+
+{% block host_content %}
+
+    {% set images = [
+        'gen_94e366db06_18eb67896de2eba2.png',
+        'gen_7747ab4caa_2d084ba9936cb701.png',
+        'gen_2e06e95900_3a246ce11c91d2b7.png',
+    ] %}
+
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <a href="{{ path('app_host_dashboard') }}" class="text-muted-app text-decoration-none">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h1 class="fw-bold text-app mb-0" style="font-size: 1.5rem;">Gallery — room #{{ id }}</h1>
+    </div>
+
+    <form method="post" enctype="multipart/form-data"
+          class="bg-white d-flex flex-column align-items-center justify-content-center text-center p-5 mb-4"
+          style="border: 2px dashed var(--c-border); border-radius: var(--radius-md);">
+        <i class="fa-solid fa-cloud-arrow-up mb-3" style="font-size: 1.75rem; color: var(--c-primary);"></i>
+        <p class="text-app fw-medium mb-1">Drag and drop photos here</p>
+        <p class="text-muted-app mb-3" style="font-size: 0.875rem;">PNG or JPG, up to 10MB each</p>
+        <label class="btn-signup" style="cursor: pointer;">
+            Choose files
+            <input type="file" name="images[]" accept="image/*" multiple hidden>
+        </label>
+    </form>
+
+    <div class="row row-cols-2 row-cols-md-3 g-3">
+        {% for image in images %}
+            <div class="col">
+                <div class="img-wrap position-relative" style="border-radius: var(--radius-md); overflow: hidden;">
+                    <img src="{{ asset('images/' ~ image) }}" alt="Room photo {{ loop.index }}">
+                    <button type="button" class="position-absolute d-flex align-items-center justify-content-center"
+                            style="top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; border: none; background-color: rgba(0,0,0,0.55); color: #fff;">
+                        <i class="fa-solid fa-xmark" style="font-size: 12px;"></i>
+                    </button>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-muted-app">No photos uploaded yet.</div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

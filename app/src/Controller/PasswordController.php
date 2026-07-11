@@ -25,7 +25,10 @@ final class PasswordController extends AbstractController
     ) {
     }
 
-    #[Route('/lost-password', name: 'app_lost_password')]
+    #[Route(
+        path: '/lost-password',
+        name: 'app_lost_password'
+    )]
     public function lostPassword(Request $request, PasswordRecovery $passwordRecovery): Response
     {
         $form = $this->createForm(LostPasswordType::class);
@@ -65,7 +68,11 @@ final class PasswordController extends AbstractController
         ], new Response(status: $form->isSubmitted() && !$form->isValid() ? 422 : 200));
     }
 
-    #[Route('reset-password', name: 'app_reset_password', methods: ['GET', 'POST'])]
+    #[Route(
+        path: 'reset-password',
+        name: 'app_reset_password',
+        methods: ['GET', 'POST']
+    )]
     public function resetPassword(Request $request, PasswordUpdater $updater): Response
     {
         $token = $request->query->get('token');

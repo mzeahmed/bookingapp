@@ -1,0 +1,43 @@
+{% extends 'host/_layout.html.twig' %}
+
+{% block title %}Room status - {% endblock %}
+
+{% block host_content %}
+
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <a href="{{ path('app_host_dashboard') }}" class="text-muted-app text-decoration-none">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h1 class="fw-bold text-app mb-0" style="font-size: 1.5rem;">Status — room #{{ id }}</h1>
+    </div>
+
+    <div class="bg-white p-4" style="border: 1px solid var(--c-border); border-radius: var(--radius-md); max-width: 560px;">
+        <p class="text-muted-app mb-4">
+            A draft room is only visible to you. Publish it to make it bookable on the marketplace.
+        </p>
+
+        <form method="post" class="d-flex flex-column gap-3">
+            <label class="d-flex align-items-center gap-3 p-3" style="border: 1px solid var(--c-border); border-radius: var(--radius-md); cursor: pointer;">
+                <input type="radio" name="status" value="draft" checked>
+                <span>
+                    <span class="d-block fw-medium text-app">Draft</span>
+                    <span class="d-block text-muted-app" style="font-size: 0.875rem;">Hidden from the marketplace</span>
+                </span>
+            </label>
+
+            <label class="d-flex align-items-center gap-3 p-3" style="border: 1px solid var(--c-border); border-radius: var(--radius-md); cursor: pointer;">
+                <input type="radio" name="status" value="published">
+                <span>
+                    <span class="d-block fw-medium text-app">Published</span>
+                    <span class="d-block text-muted-app" style="font-size: 0.875rem;">Visible and bookable by guests</span>
+                </span>
+            </label>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn-signup">Save status</button>
+                <a href="{{ path('app_host_dashboard') }}" class="btn-login">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

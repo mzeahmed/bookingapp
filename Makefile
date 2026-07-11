@@ -10,6 +10,9 @@ YELLOW=\033[0;33m
 BLUE=\033[0;34m
 NO_COLOR=\033[0m
 
+CERT_FILE := certs/goflix.local+1.pem
+CERT_KEY  := certs/goflix.local+1-key.pem
+
 setup: ## Configure repository (git hooks, etc.)
 	git config core.hooksPath .githooks
 	@echo "$(GREEN)Git hooks configured -> .githooks$(NO_COLOR)"
@@ -25,6 +28,16 @@ hosts: ## Add local domains to /etc/hosts (requires sudo)
 		fi; \
 	done
 
+certs: ## Generate local TLS certificats if absent (require mkcert)
+	@if [ -f $(CERT_FILE) ] && [ -f $(CERT_KEY) ]; then \
+		echo "$(GREEN)Certificats already present$(RESET)"; \
+	else \
+		echo "$(YELLOW)Certificats genration...$(RESET)"; \
+		mkcert -install; \
+		mkcert -cert-file $(CERT_FILE) -key-file $(CERT_KEY) bookingapp.local "*.bookingapp.local"; \
+		echo "$(GREEN)Certificats generated in certs dir$(RESET)"; \
+	fi
+
 help: ## Show available commands
 	@echo ""
 	@echo "Usage: make [target]"
@@ -33,7 +46,7 @@ help: ## Show available commands
 		| awk 'BEGIN {FS = ":.*?## "}; {printf " %-28s %s\n", $$1, $$2}'
 	@echo ""
 
-build: ## Build containers
+build: certs ## Build containers
 	@echo "$(YELLOW)Building containers...$(NO_COLOR)"
 	$(COMPOSE) build
 	@echo "$(GREEN)Containers built$(NO_COLOR)"

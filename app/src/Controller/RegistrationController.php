@@ -25,7 +25,10 @@ final class RegistrationController extends AbstractController
     ) {
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route(
+        path: '/register',
+        name: 'app_register'
+    )]
     public function register(Request $request, RegisterUser $registerUser): Response
     {
         $user = new User();
@@ -56,7 +59,10 @@ final class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route(
+        path: '/verify/email',
+        name: 'app_verify_email'
+    )]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
         $id = $request->query->get('id');
