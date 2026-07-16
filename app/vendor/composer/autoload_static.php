@@ -18,6 +18,7 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         'ffecb95d45175fd40f75be8a23b34f90' => __DIR__ . '/..' . '/twig/twig/src/Resources/debug.php',
         'c7baa00073ee9c61edf148c51917cfb4' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
         'f844ccf1d25df8663951193c3fc307c8' => __DIR__ . '/..' . '/twig/twig/src/Resources/string_loader.php',
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
@@ -123,6 +124,16 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
             'SymfonyCasts\\Bundle\\VerifyEmail\\' => 32,
             'Sensiolabs\\TypeScriptBundle\\' => 28,
         ),
+        'R' =>
+        array (
+            'React\\Stream\\' => 13,
+            'React\\Socket\\' => 13,
+            'React\\Promise\\' => 14,
+            'React\\EventLoop\\' => 16,
+            'React\\Dns\\' => 10,
+            'React\\ChildProcess\\' => 19,
+            'React\\Cache\\' => 12,
+        ),
         'P' =>
         array (
             'Psr\\Log\\' => 8,
@@ -132,6 +143,7 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
             'Psr\\Clock\\' => 10,
             'Psr\\Cache\\' => 10,
             'PhpParser\\' => 10,
+            'PhpCsFixer\\' => 11,
             'PHPStan\\PhpDocParser\\' => 21,
             'PHPStan\\' => 8,
         ),
@@ -141,10 +153,13 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         ),
         'F' =>
         array (
+            'Fidry\\CpuCoreCounter\\' => 21,
             'Faker\\' => 6,
         ),
         'E' =>
         array (
+            'Evenement\\' => 10,
+            'Ergebnis\\AgentDetector\\' => 23,
             'Egulias\\EmailValidator\\' => 23,
             'EasyCorp\\Bundle\\EasyAdminBundle\\' => 32,
         ),
@@ -166,12 +181,13 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
             'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
             'DeepCopy\\' => 9,
-            'Database\\Seeders\\' => 17,
-            'Database\\Factories\\' => 19,
         ),
         'C' =>
         array (
+            'Composer\\XdebugHandler\\' => 23,
             'Composer\\Semver\\' => 16,
+            'Composer\\Pcre\\' => 14,
+            'Clue\\React\\NDJson\\' => 18,
         ),
         'A' =>
         array (
@@ -507,6 +523,34 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         array (
             0 => __DIR__ . '/..' . '/sensiolabs/typescript-bundle/src',
         ),
+        'React\\Stream\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/stream/src',
+        ),
+        'React\\Socket\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/socket/src',
+        ),
+        'React\\Promise\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
+        'React\\EventLoop\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/event-loop/src',
+        ),
+        'React\\Dns\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/dns/src',
+        ),
+        'React\\ChildProcess\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/child-process/src',
+        ),
+        'React\\Cache\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/react/cache/src',
+        ),
         'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
@@ -535,6 +579,10 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'PhpCsFixer\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/friendsofphp/php-cs-fixer/src',
+        ),
         'PHPStan\\PhpDocParser\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
@@ -547,9 +595,21 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Fidry\\CpuCoreCounter\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/fidry/cpu-core-counter/src',
+        ),
         'Faker\\' =>
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
+        ),
+        'Evenement\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/evenement/evenement/src',
+        ),
+        'Ergebnis\\AgentDetector\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/ergebnis/agent-detector/src',
         ),
         'Egulias\\EmailValidator\\' =>
         array (
@@ -623,17 +683,21 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'Database\\Seeders\\' =>
+        'Composer\\XdebugHandler\\' =>
         array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
-        ),
-        'Database\\Factories\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/factories',
+            0 => __DIR__ . '/..' . '/composer/xdebug-handler/src',
         ),
         'Composer\\Semver\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
+        ),
+        'Composer\\Pcre\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/composer/pcre/src',
+        ),
+        'Clue\\React\\NDJson\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/clue/ndjson-react/src',
         ),
         'App\\Tests\\' =>
         array (
@@ -642,7 +706,6 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         'App\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
-            1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
     );
 

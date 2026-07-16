@@ -24,9 +24,7 @@ class UserChecker implements UserCheckerInterface
         }
 
         if (!$user->isVerified()) {
-            throw new CustomUserMessageAccountStatusException(
-                'You must verify your email address before logging in.'
-            );
+            throw new CustomUserMessageAccountStatusException('You must verify your email address before logging in.');
         }
     }
 }

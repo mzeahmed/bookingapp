@@ -94,15 +94,15 @@ fixtures: ## Load fixtures into the database
 	$(COMPOSE) exec php php app/bin/console doctrine:fixtures:load --no-interaction
 	@echo "$(GREEN)Fixtures loaded$(NO_COLOR)"
 
-pint: ## Run Pint in test mode
-	@echo "$(YELLOW)Running Pint...$(NO_COLOR)"
+cs: ## Run Php CS Fixer in test mode
+	@echo "$(YELLOW)Running PHP CS Fixer...$(NO_COLOR)"
 	cd app && composer run lint
-	@echo "$(GREEN)Pint completed$(NO_COLOR)"
+	@echo "$(GREEN)PHP CS Fixer completed$(NO_COLOR)"
 
-pintf: ## Run Pint with auto-fix
-	@echo "$(YELLOW)Running Pint with fixes...$(NO_COLOR)"
+csf: ## Run Php CS Fixer in fix mode
+	@echo "$(YELLOW)Running PHP CS Fixer (fix mode)...$(NO_COLOR)"
 	cd app && composer run lint:fix
-	@echo "$(GREEN)Pint completed$(NO_COLOR)"
+	@echo "$(GREEN)PHP CS Fixer completed$(NO_COLOR)"
 
 stan: ## Run PHPStan
 	@echo "$(YELLOW)Running PHPStan...$(NO_COLOR)"

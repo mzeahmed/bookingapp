@@ -14,7 +14,7 @@ class RegisterUser
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $hasher,
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 

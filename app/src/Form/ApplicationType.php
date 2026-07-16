@@ -29,7 +29,7 @@ class ApplicationType extends AbstractType
      *
      * @return array<string, mixed> the merged field options, ready to pass to $builder->add()
      */
-    protected function getConfiguration(string | bool $label, string $placeholder, array $options = []): array
+    protected function getConfiguration(string|bool $label, string $placeholder, array $options = []): array
     {
         return array_merge_recursive([
             'label' => $label,

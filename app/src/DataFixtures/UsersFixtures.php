@@ -25,8 +25,6 @@ class UsersFixtures
     }
 
     /**
-     * @param ObjectManager $manager
-     *
      * @throws \Exception
      */
     public function load(ObjectManager $manager): void
@@ -76,7 +74,7 @@ class UsersFixtures
     {
         $users = [];
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $genre = $this->faker->randomElement($this->genres);
             $firstName = $this->faker->firstName($genre);
             $lastName = $this->faker->lastName();

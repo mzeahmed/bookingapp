@@ -12,7 +12,7 @@ class ResetPasswordTokenizer
 {
     public function __construct(
         private readonly UserRepository $repository,
-        private readonly EntityManagerInterface $em
+        private readonly EntityManagerInterface $em,
     ) {
     }
 

@@ -21,7 +21,7 @@ final class PasswordController extends AbstractController
 {
     public function __construct(
         private readonly ResetPasswordTokenizer $tokenizer,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
     ) {
     }
 

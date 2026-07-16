@@ -62,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\PrePersist]
     public function initTimestamps(): void
     {
-        if ($this->createdAt === null) {
+        if (null === $this->createdAt) {
             $this->createdAt = new \DateTimeImmutable();
         }
         $this->updatedAt = new \DateTimeImmutable();
