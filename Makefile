@@ -109,6 +109,16 @@ stan: ## Run PHPStan
 	./app/vendor/bin/phpstan analyse -c app/phpstan.neon
 	@echo "$(GREEN)PHPStan completed$(NO_COLOR)"
 
+rector: ## Run Rector
+	@echo "$(YELLOW)Running Rector...$(NO_COLOR)"
+	@cd app && ./vendor/bin/rector process
+	@echo "$(GREEN)Rector completed$(NO_COLOR)"
+
+rector-check: ## Run Rector in check mode
+	@echo "$(YELLOW)Running Rector (check mode)...$(NO_COLOR)"
+	@cd app && ./vendor/bin/rector process --dry-run
+	@echo "$(GREEN)Rector completed$(NO_COLOR)"
+
 # ========================
 # Assets
 # ========================

@@ -71,7 +71,8 @@ Administrators can:
 ### Quality
 
 * PHPStan
-* Laravel Pint
+* PHP CS Fixer
+* Rector
 * PHPUnit
 
 ---
@@ -236,19 +237,31 @@ make bash
 ### Run Code Style Check
 
 ```bash
-make pint
+make cs
 ```
 
 ### Fix Code Style Issues
 
 ```bash
-make pintf
+make csf
 ```
 
 ### Run Static Analysis
 
 ```bash
 make stan
+```
+
+### Run Rector (Check Mode)
+
+```bash
+make rector-check
+```
+
+### Run Rector (Apply Refactorings)
+
+```bash
+make rector
 ```
 
 ---
@@ -319,7 +332,7 @@ make stan
 4. Run coding standards.
 
 ```bash
-make pint
+make cs
 ```
 
 5. Submit a pull request.

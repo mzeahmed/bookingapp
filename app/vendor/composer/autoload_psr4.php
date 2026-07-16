@@ -132,5 +132,6 @@ return array(
     'Composer\\Pcre\\' => array($vendorDir . '/composer/pcre/src'),
     'Clue\\React\\NDJson\\' => array($vendorDir . '/clue/ndjson-react/src'),
     'App\\Tests\\' => array($baseDir . '/tests'),
+    'App\\CsFixer\\' => array($baseDir . '/tools/CsFixer'),
     'App\\' => array($baseDir . '/src'),
 );

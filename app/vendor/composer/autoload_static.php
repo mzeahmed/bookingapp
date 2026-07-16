@@ -21,13 +21,14 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '1052008401d4a2a5be02f7b4e274d051' => __DIR__ . '/..' . '/twig/html-extra/Resources/functions.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '38143a9afc50997d55e4815db8489d1c' => __DIR__ . '/..' . '/rector/rector/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -192,6 +193,7 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         'A' =>
         array (
             'App\\Tests\\' => 10,
+            'App\\CsFixer\\' => 12,
             'App\\' => 4,
         ),
     );
@@ -702,6 +704,10 @@ class ComposerStaticInite8d3a95da1ed2c87bca868e4168fd74a
         'App\\Tests\\' =>
         array (
             0 => __DIR__ . '/../..' . '/tests',
+        ),
+        'App\\CsFixer\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/tools/CsFixer',
         ),
         'App\\' =>
         array (
