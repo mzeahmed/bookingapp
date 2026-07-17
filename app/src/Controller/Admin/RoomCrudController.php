@@ -37,7 +37,7 @@ class RoomCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Room')
             ->setEntityLabelInPlural('Rooms')
             ->setDefaultSort(['createdAt' => 'DESC'])
-            ->setSearchFields(['name', 'city', 'adress', 'postal_code']);
+            ->setSearchFields(['name', 'city', 'address', 'postal_code']);
     }
 
     public function configureFields(string $pageName): iterable
@@ -50,7 +50,7 @@ class RoomCrudController extends AbstractCrudController
             ->setCurrency('EUR')
             ->setStoredAsCents(false)
             ->setNumDecimals(0);
-        yield TextField::new('adress', 'Address')->setRequired(false);
+        yield TextField::new('address', 'Address')->setRequired(false);
         yield TextField::new('city', 'City')->setRequired(false);
         yield TextField::new('postalCode', 'Postal code')->setRequired(false);
         yield AssociationField::new('equipments', 'Equipment')->autocomplete();

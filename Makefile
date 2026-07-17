@@ -10,8 +10,8 @@ YELLOW=\033[0;33m
 BLUE=\033[0;34m
 NO_COLOR=\033[0m
 
-CERT_FILE := certs/goflix.local+1.pem
-CERT_KEY  := certs/goflix.local+1-key.pem
+CERT_FILE := certs/bookingapp.local+1.pem
+CERT_KEY  := certs/bookingapp.local+1-key.pem
 
 setup: ## Configure repository (git hooks, etc.)
 	git config core.hooksPath .githooks
